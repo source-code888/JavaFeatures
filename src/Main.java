@@ -1,15 +1,23 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+public class Main {
+
+    public static void main(String[] args) {
+        var array = new ArrayList<String>(List.of("Hola mundo", "Hola2"));
+        var iterator = array.iterator();
+        var stream = toStream(iterator);
+        stream.toList().forEach(System.out::println);
     }
+
+    private static Stream<String> toStream(Iterator<String> iterator) {
+        var spliterator = Spliterators.spliteratorUnknownSize(
+                iterator,
+                Spliterator.DISTINCT |
+                        Spliterator.NONNULL | Spliterator.SORTED
+        );
+        return StreamSupport.stream(spliterator, false);
+    }
+
 }
