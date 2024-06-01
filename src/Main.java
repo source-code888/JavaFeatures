@@ -19,5 +19,5 @@ public class Main {
         );
         return StreamSupport.stream(spliterator, false);
     }
-
+    
 }
